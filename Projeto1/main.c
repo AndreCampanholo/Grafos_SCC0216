@@ -11,8 +11,6 @@ int main() {
   scanf("%d", &option);
 
   switch (option) {
-    int x, y, w;
-
   case 0:
     G = MyGraph(N);
   case 1: {
@@ -22,8 +20,8 @@ int main() {
     add_edge(G, x, y, w);
     scanf("%d %d %d", &x, &y, &w);
     add_edge(G, x, y, w);
-    scanf("%d %d %d", &x, &y, &w);
-    add_edge(G, x, y, w);
+    /* scanf("%d %d %d", &x, &y, &w); */
+    /* add_edge(G, x, y, w); */
     break;
   }
   case 2:

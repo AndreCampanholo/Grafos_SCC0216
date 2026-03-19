@@ -110,13 +110,42 @@ int *neighbors(GRAPH *graph, int node) {
   return neighbors_array;
 }
 
-void print_info(GRAPH *graph) {}
+void print_info(GRAPH *graph) {
+  if (graph == NULL)
+    return;
+
+  printf("V = [");
+
+  for (int i = 0; i < graph->size - 1; i++)
+    printf("%d, ", i + 1);
+
+  printf("%d]\n", graph->size);
+
+  printf("E = [");
+
+  bool foundEdge = false;
+
+  for (int i = 0; i < graph->size; i++) {
+    for (int j = i; j < graph->size; j++) {
+      if (graph->adj[i][j] != -1) {
+        if (foundEdge)
+          printf(", ");
+
+        printf("(%d, %d)", i, j);
+
+        foundEdge = true;
+      }
+    }
+  }
+
+  printf("]\n");
+}
 
 int max_neighbors(GRAPH *graph) {
   if (graph == NULL)
     return -1;
 
-  int max = 0, cur;
+  int max_nbs = -1, max_node = -1, cur;
 
   for (int i = 0; i < graph->size; i++) {
     cur = 0;
@@ -124,10 +153,14 @@ int max_neighbors(GRAPH *graph) {
     for (int j = 0; j < graph->size; j++) {
       cur += graph->adj[i][j] != -1;
     }
-    max = cur > max ? cur : max;
+
+    if (cur > max_nbs) {
+      max_nbs = cur;
+      max_node = i;
+    }
   }
 
-  return max;
+  return max_node;
 }
 
 int **adjacency_matrix(GRAPH *graph) {
