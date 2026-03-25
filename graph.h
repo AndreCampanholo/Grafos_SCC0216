@@ -13,6 +13,12 @@ void delete_graph(GRAPH **graph);
 
 void add_edge(GRAPH *graph, int node1, int node2, int weight);
 
+bool exist_edge(GRAPH *graph, int node1, int node2);
+
+int *neighbors(GRAPH *graph, int node);
+
+bool remove_edge(GRAPH *graph, int node1, int node2);
+
 int max_neighbors(GRAPH *graph);
 
 void print_info(GRAPH *graph);
