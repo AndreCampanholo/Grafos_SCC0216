@@ -1,7 +1,8 @@
 #include "graph.h"
 #include <stdio.h>
 
-int main() {
+int main()
+{
   int option;
   int N, x, y, w;
   scanf("%d", &N);
@@ -10,18 +11,20 @@ int main() {
 
   scanf("%d", &option);
 
-  switch (option) {
+  switch (option)
+  {
   case 0:
     G = MyGraph(N);
-  case 1: {
+    break;
+  case 1:
+  {
+    G = MyGraph(N);
     scanf("%d %d %d", &x, &y, &w);
     add_edge(G, x, y, w);
     scanf("%d %d %d", &x, &y, &w);
     add_edge(G, x, y, w);
     scanf("%d %d %d", &x, &y, &w);
     add_edge(G, x, y, w);
-    /* scanf("%d %d %d", &x, &y, &w); */
-    /* add_edge(G, x, y, w); */
     break;
   }
   case 2:
@@ -32,4 +35,6 @@ int main() {
 
   print_info(G);
   delete_graph(&G);
+
+  return 0;
 }
