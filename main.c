@@ -324,7 +324,7 @@ int main(void)
       free(adj_matrix);
       break;
     case 6:
-      // Exibe o vértice com o maior número de vizinhos. Em casa de empate, imprime-se o primeiro encontrado (menor índice)
+      // Exibe o vértice com o maior número de vizinhos. Em caso de empate, imprime-se o primeiro encontrado (menor índice)
       printf("max vertex: %d\n", max_neighbors(G));
       break;
     default:
