@@ -8,14 +8,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// definição da struct do grafo
+// Definição da struct do grafo como uma matriz de adjacências
 typedef struct graph
 {
   int size;
   int **adj;
 } GRAPH;
 
-//função auxiliar para alocação dinâmica de matriz de adjacências
+// Função auxiliar para alocação dinâmica de matriz de adjacências
 int **alloc_matrix(int size)
 {
   int **matrix = malloc(size * sizeof(int *));
@@ -27,6 +27,7 @@ int **alloc_matrix(int size)
   {
     matrix[i] = malloc(size * sizeof(int));
 
+    // Libera toda a matriz caso haja erro na alocação de alguma linha
     if (matrix[i] == NULL)
     {
       for (int j = 0; j < i; j++)
@@ -37,10 +38,11 @@ int **alloc_matrix(int size)
     }
   }
 
+  // Retorna um ponteiro para a matriz de adjacências
   return matrix;
 }
 
-//função auxiliar para liberação de matriz de adjacências
+// Função auxiliar para liberação de matriz de adjacências
 void free_matrix(int **matrix, int size)
 {
   if (matrix == NULL)
@@ -52,6 +54,7 @@ void free_matrix(int **matrix, int size)
   free(matrix);
 }
 
+// Função para criar o grafo dada a quantidade de arrestas
 GRAPH *MyGraph(int size)
 {
   GRAPH *graph = malloc(sizeof(GRAPH));
@@ -68,6 +71,7 @@ GRAPH *MyGraph(int size)
     return NULL;
   }
 
+  // Pre-define todas as células da matriz como -1 (inicialmente não existem arestas)
   for (int i = 0; i < size; i++)
     for (int j = 0; j < size; j++)
       adj[i][j] = -1;
@@ -75,9 +79,11 @@ GRAPH *MyGraph(int size)
   graph->size = size;
   graph->adj = adj;
 
+  // Retorna um ponteiro para o grafo
   return graph;
 }
 
+// Função para deletar o grafo (liberar memória alocada)
 void delete_graph(GRAPH **graph)
 {
   if (graph != NULL && *graph != NULL)
@@ -90,6 +96,7 @@ void delete_graph(GRAPH **graph)
   }
 }
 
+// Função para adicionar uma aresta ao grafo informando os nós vizinhos e seu peso
 void add_edge(GRAPH *graph, int node1, int node2, int weight)
 {
   if (graph == NULL)
