@@ -32,6 +32,14 @@ int main(void)
       res = exist_edge(G, x, y);
       print_status = 0;
       break;
+    case 3:
+      //vizinhos do nó lido
+      scanf("%d", &x);
+      neighbors(G, x);
+      break;
+    case 4:
+      
+      break;  
     default:
       printf("unrecognized option %d!\n", option);
     }
