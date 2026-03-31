@@ -15,7 +15,7 @@ typedef struct graph
   int **adj;
 } GRAPH;
 
-//função auxiliar para alocação dinâmica de matriz de adjacências
+// função auxiliar para alocação dinâmica de matriz de adjacências
 int **alloc_matrix(int size)
 {
   int **matrix = malloc(size * sizeof(int *));
@@ -40,7 +40,7 @@ int **alloc_matrix(int size)
   return matrix;
 }
 
-//função auxiliar para liberação de matriz de adjacências
+// função auxiliar para liberação de matriz de adjacências
 void free_matrix(int **matrix, int size)
 {
   if (matrix == NULL)
@@ -211,7 +211,7 @@ int max_neighbors(GRAPH *graph)
   return max_node + 1;
 }
 
-// Cria uma cópia da matriz de adjacência (útil para não modificar a original)
+// Cria uma cópia da matriz de adjacência (para não modificar a original)
 int **adjacency_matrix(GRAPH *graph)
 {
   if (graph == NULL)
@@ -238,7 +238,7 @@ int main(void)
 
   GRAPH *G = NULL;
 
-  // Loop principal: lê opções até receber -1 para sair
+  // Loop principal: lê as opções até receber -1 para sair
   scanf("%d", &option);
 
   while (option != -1)
@@ -269,7 +269,7 @@ int main(void)
         printf("0");
       break;
     case 3:
-      // vizinhos do nó lido
+      // Imprime todos os vizinhos do nó lido
       scanf("%d", &x);
       int *v_vizinhos = neighbors(G, x);
       if (v_vizinhos != NULL)
@@ -285,7 +285,7 @@ int main(void)
       }
       break;
     case 4:
-      // Remove uma aresta (se existir)
+      // Remove uma aresta. Caso não exista, retorna -1
       scanf("%d %d", &x, &y);
       res = remove_edge(G, x, y);
       if (res == -1)
@@ -294,27 +294,30 @@ int main(void)
         print_status = true;
       break;
     case 5:
-      // Exibe a matriz de adjacência (converte -1 em 0 para visualizar melhor)
+      // Exibe a matriz de adjacência
       printf("Adjacency Matrix:\n");
       int **adj_matrix = adjacency_matrix(G);
-      for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
+      for (int i = 0; i < N; i++)
+      {
+        for (int j = 0; j < N; j++)
+        {
           int curr_value = adj_matrix[i][j];
-          if(curr_value == -1)
-            curr_value++;
-          if(j == N - 1)
+          if (curr_value == -1)
+            curr_value++; // Caso a aresta não exista, incrementa 1 para, na impressão, apresentar 0 ao invés de -1
+          if (j == N - 1)
             printf("%3d\n", curr_value);
           else
             printf("%3d ", curr_value);
         }
       }
-      for(int j = 0; j < N; j++) {
-        free(adj_matrix[j]);
+      for (int i = 0; i < N; i++)
+      {
+        free(adj_matrix[i]);
       }
       free(adj_matrix);
       break;
     case 6:
-      // Exibe o n\u00f3 com maior grau de conex\u00e3o
+      // Exibe o vértice com o maior número de vizinhos. Em casa de empate, imprime-se o primeiro encontrado (menor índice)
       printf("max vertex: %d\n", max_neighbors(G));
       break;
     default:
@@ -326,6 +329,6 @@ int main(void)
   if (print_status)
     print_info(G);
 
-  delete_graph(&G);
+  delete_graph(&G); // Desaloca toda memória dinâmica
   return 0;
 }
