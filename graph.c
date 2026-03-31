@@ -79,13 +79,14 @@ void add_edge(GRAPH *graph, int node1, int node2, int weight)
   graph->adj[node2][node1] = weight;
 }
 
-void remove_edge(GRAPH *graph, int node1, int node2)
+int remove_edge(GRAPH *graph, int node1, int node2)
 {
-  if (graph == NULL)
-    return;
-
-  graph->adj[node1][node2] = -1;
-  graph->adj[node2][node1] = -1;
+  if (graph->adj[node1][node2] && graph != NULL){
+    graph->adj[node1][node2] = -1;
+    graph->adj[node2][node1] = -1;
+    return 1;
+  }
+  return -1;
 }
 
 bool exist_edge(GRAPH *graph, int node1, int node2)
